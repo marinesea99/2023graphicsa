@@ -1,7 +1,8 @@
 # depslib dependency file v1.0
-1683683132 source:c:\users\administrator\desktop\2023graphicsa\final_project\main.cpp
+1684294250 source:c:\users\administrator\desktop\2023graphicsa\final_project\main.cpp
 	<stdio.h>
 	<GL/glut.h>
+	"glm.h"
 
 1684286998 c:\users\administrator\desktop\2023graphicsa\final_project\freeglut\include\gl\glut.h
 	"freeglut_std.h"
