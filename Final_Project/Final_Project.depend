@@ -3,10 +3,10 @@
 	<stdio.h>
 	<GL/glut.h>
 
-1683680226 c:\users\administrator\desktop\2023graphicsa\final_project\freeglut\include\gl\glut.h
+1684286998 c:\users\administrator\desktop\2023graphicsa\final_project\freeglut\include\gl\glut.h
 	"freeglut_std.h"
 
-1683680226 c:\users\administrator\desktop\2023graphicsa\final_project\freeglut\include\gl\freeglut_std.h
+1684286998 c:\users\administrator\desktop\2023graphicsa\final_project\freeglut\include\gl\freeglut_std.h
 	<windows.h>
 	<EGL/egl.h>
 	<GLES/gl.h>
@@ -17,7 +17,7 @@
 	<GL/glu.h>
 	<stdlib.h>
 
-1683683132 source:c:\users\administrator\desktop\2023graphicsa\final_project\glm.cpp
+1684286998 source:c:\users\administrator\desktop\2023graphicsa\final_project\glm.cpp
 	<math.h>
 	<stdio.h>
 	<stdlib.h>
@@ -25,6 +25,6 @@
 	<assert.h>
 	"glm.h"
 
-1683683132 c:\users\administrator\desktop\2023graphicsa\final_project\glm.h
+1684286998 c:\users\administrator\desktop\2023graphicsa\final_project\glm.h
 	<GL/glut.h>
 
