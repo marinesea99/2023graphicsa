@@ -5,24 +5,37 @@ GLMmodel * head = NULL;
 GLMmodel * body = NULL;
 GLMmodel * uparmR = NULL;
 GLMmodel * lowarmR = NULL;
-int show[4]={0, 0, 1, 1};
+int show[4]={1, 1, 1, 1};
 int ID=3;
+FILE * fout = NULL;
+FILE * fin =NULL;
+float teapotX=0, teapotY=0;
+///float angle=0, angle2=0, angle3=0;
+float angle[20] = {};
 void keyboard(unsigned char key,int x, int y)
 {
     if(key=='0') ID = 0;
     if(key=='1') ID = 1;
     if(key=='2') ID = 2;
     if(key=='3') ID = 3;
+    if(key=='s'){
+        if(fout==NULL) fout = fopen("motion.txt", "w");
+        for(int i=0;i<20;i++){
+                fprintf(fout, "%.2f", angle[i]);
+        }
+        fprintf(fout, "\n");
+    }else if(key=='r'){
+        if(fin==NULL) fin = fopen("motion.txt", "r");
+        for(int i=0;i<20;i++){
+            fscanf(fin, "%f", &angle[i]);
+        }
+    }
+    glutPostRedisplay();
     ///if(key=='0') show[0] = !show[0];
     ///if(key=='1') show[1] = !show[1];
     ///if(key=='2') show[2] = !show[2];
     ///if(key=='3') show[3] = !show[3];
-    glutPostRedisplay();
 }
-FILE * fout = NULL;
-FILE * fin =NULL;
-float teapotX=0, teapotY=0;
-float angle=0, angle2=0, angle3=0;
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -46,7 +59,7 @@ void display()
         glPushMatrix();
             glTranslatef(-1.119999, 0.400000, 0);
             //glTranslatef(-teapotX,-teapotY,0);
-            glRotatef(angle,0,0,1);
+            glRotatef(angle[2],0,0,1);
             glTranslatef(1.119999, -0.400000, 0);
 
             if(ID==2) glColor3f(1,0,0);
@@ -55,7 +68,7 @@ void display()
 
             glPushMatrix();
                 glTranslatef(-1.853332, 0.060000, 0);
-                glRotatef(angle,0,0,1);
+                glRotatef(angle[3],0,0,1);
                 glTranslatef(1.853332, -0.060000, 0);
                 if(ID==3) glColor3f(1,0,0);
                 else glColor3f(1,1,1);
@@ -76,9 +89,9 @@ void motion(int x,int y)
 {
     teapotX += (x - oldX)/150.0;
     teapotY -= (y - oldY)/150.0;
+    angle[ID] += (x - oldX);
     oldX=x;
     oldY=y;
-    angle = x;
     printf("glTranslatef(%f, %f, 0);\n",teapotX, teapotY);
     glutPostRedisplay();
 }
@@ -87,7 +100,7 @@ void mouse(int button, int state, int x, int y)
     if(state==GLUT_DOWN){
         oldX = x;
         oldY = y;
-        angle = x;
+        ///angle = x;
         ///teapotX = (x-150)/150.0;
         ///teapotY = (150-y)/150.0;
         ///if(fout==NULL) fout = fopen("file4.txt", "w");
