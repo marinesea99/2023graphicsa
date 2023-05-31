@@ -44,7 +44,7 @@ void timer(int t) {
             fscanf(fin, "%f", &NewAngle2[i] );
         }
     }
-    float alpha = t / 50.0;
+    float alpha = (t%50) / 50.0;
     for(int i=0; i<20; i++){
         angle[i] = alpha * NewAngle[i] + (1-alpha) * OldAngle[i];
         angle2[i] = alpha * NewAngle2[i] + (1-alpha) * OldAngle2[i];
