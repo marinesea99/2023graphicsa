@@ -9,7 +9,7 @@ GLMmodel * hand1 = NULL;
 GLMmodel * hand2 = NULL;
 GLMmodel * leg1 = NULL;
 GLMmodel * leg2 = NULL;
-/*int myTexture(char * filename)
+int myTexture(char * filename)
 {
     IplImage * img = cvLoadImage(filename); ///OpenCV讀圖
     cvCvtColor(img,img, CV_BGR2RGB); ///OpenCV轉色彩 (需要cv.h)
@@ -23,13 +23,14 @@ GLMmodel * leg2 = NULL;
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); /// 貼圖參數, 縮小時的內插, 用最近點
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img->width, img->height, 0, GL_RGB, GL_UNSIGNED_BYTE, img->imageData);
     return id;
-}*/
+}
 FILE * fin = NULL;
 FILE * fout = NULL;
 float teapotX=0, teapotY=0, oldX=0, oldY=0;  ///有不同
 float angle[20]={}, angle2[20]={};
 float OldAngle[20]={}, NewAngle[20]={};
 float OldAngle2[20]={}, NewAngle2[20]={};
+//float Tangle = 0;
 int ID=0; ///0:head, 1,2:left, 3,4:right hand, 5,6,7:left leg, 8,9,10:right leg
 void timer(int t) {
     glutTimerFunc(20, timer, t+1);
@@ -92,6 +93,7 @@ void motion(int x, int y) {
     glutPostRedisplay();
 }
 void display() {
+    //glClearColor(1,1,1,1);///用來清背景的色彩R,G,B,A
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
     glPushMatrix();
         glTranslatef(0, -0.3, 0);
@@ -154,7 +156,39 @@ void display() {
     glutSolidTeapot( 0.01 );
 
     glutSwapBuffers();
+    //Tangle++;///把角度++
 }
+/*myLight()
+{
+    const GLfloat light_ambient[]  = { 0.0f, 0.0f, 0.0f, 1.0f };
+    const GLfloat light_diffuse[]  = { 1.0f, 1.0f, 1.0f, 1.0f };
+    const GLfloat light_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    const GLfloat light_position[] = { 2.0f, 5.0f, 5.0f, 0.0f };
+
+    const GLfloat mat_ambient[]    = { 0.7f, 0.7f, 0.7f, 1.0f };
+    const GLfloat mat_diffuse[]    = { 0.8f, 0.8f, 0.8f, 1.0f };
+    const GLfloat mat_specular[]   = { 1.0f, 1.0f, 1.0f, 1.0f };
+    const GLfloat high_shininess[] = { 100.0f };
+
+
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+
+    glEnable(GL_LIGHT0);
+    glEnable(GL_NORMALIZE);
+    glEnable(GL_COLOR_MATERIAL);
+    glEnable(GL_LIGHTING);
+
+    glLightfv(GL_LIGHT0, GL_AMBIENT,  light_ambient);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE,  light_diffuse);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+
+    glMaterialfv(GL_FRONT, GL_AMBIENT,   mat_ambient);
+    glMaterialfv(GL_FRONT, GL_DIFFUSE,   mat_diffuse);
+    glMaterialfv(GL_FRONT, GL_SPECULAR,  mat_specular);
+    glMaterialfv(GL_FRONT, GL_SHININESS, high_shininess);
+}*/
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
@@ -162,6 +196,7 @@ int main(int argc, char** argv)
     glutCreateWindow("week16");
 
     glutDisplayFunc(display);
+    //glutIdleFunc(display);
     glutMotionFunc(motion);
     glutMouseFunc(mouse);
     glutKeyboardFunc(keyboard);
@@ -174,5 +209,6 @@ int main(int argc, char** argv)
     leg2 = glmReadOBJ("lego/leg2.obj");
     glEnable(GL_DEPTH_TEST);
 
+    //myLight();
     glutMainLoop();
 }
