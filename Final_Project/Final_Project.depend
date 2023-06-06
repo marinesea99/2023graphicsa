@@ -54,7 +54,7 @@
 	<GL/glu.h>
 	<stdlib.h>
 
-1686043817 source:c:\users\user\desktop\2023graphicsa\final_project\main.cpp
+1686047940 source:c:\users\user\desktop\2023graphicsa\final_project\main.cpp
 	<stdio.h>
 	<opencv/highgui.h>
 	<opencv/cv.h>

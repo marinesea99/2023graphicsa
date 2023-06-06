@@ -94,9 +94,23 @@ void motion(int x, int y) {
     ///printf("glTranslatef(%.3f , %.3f , 0 );\n", teapotX, teapotY);
     glutPostRedisplay();
 }
+int imgxbw;
 void display() {
-    //glClearColor(1,1,1,1);///用來清背景的色彩R,G,B,A
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+    glColor3f(1,1,1);
+    glPushMatrix();
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D,imgxbw);
+    glScalef(1,2,1);
+    glTranslatef(0,0,0.9);
+    glBegin(GL_POLYGON);
+        glTexCoord2f(0,0); glVertex2f(-1.1,+0.7);
+        glTexCoord2f(1,0); glVertex2f(+1.1,+0.7);
+        glTexCoord2f(1,1); glVertex2f(+1.1,-0.7);
+        glTexCoord2f(0,1); glVertex2f(-1.1,-0.7);
+    glEnd();
+    glPopMatrix();
+
     glPushMatrix();
         glRotatef(angle[0], 0, 1, 0);
         glRotatef(angle2[0], 1, 0, 0);
@@ -108,7 +122,7 @@ void display() {
             glScalef(0.1, 0.1, 0.1);
             ///glRotatef(angle, 0, 1, 0);
             glColor3f(1,0,0);
-            glmDraw(body, GLM_MATERIAL | GLM_TEXTURE); ///glmDraw(gundam, GLM_MATERIAL | GLM_TEXTURE);
+            glmDraw(body, GLM_MATERIAL); ///glmDraw(gundam, GLM_MATERIAL | GLM_TEXTURE);
 
 
             glPushMatrix();
@@ -118,7 +132,7 @@ void display() {
                 glTranslatef(0.000 , -6.300 , 0 );
                 //glTranslatef(teapotX, teapotY, 0);
                 glColor3f(1,1,0);
-                glmDraw(head, GLM_MATERIAL | GLM_TEXTURE);
+                glmDraw(head, GLM_MATERIAL);
             glPopMatrix();
 
             glPushMatrix();
@@ -128,7 +142,7 @@ void display() {
                 glTranslatef(1.500 , -5.800 , 0 );
                 //glTranslatef(teapotX, teapotY, 0);
                 glColor3f(1,0,0);
-                glmDraw(hand1, GLM_MATERIAL | GLM_TEXTURE);
+                glmDraw(hand1, GLM_MATERIAL);
             glPopMatrix();
 
             glPushMatrix();
@@ -138,7 +152,7 @@ void display() {
                 glTranslatef(-1.500 , -5.800 , 0 );
                 //glTranslatef(teapotX, teapotY, 0);
                 glColor3f(1,0,0);
-                glmDraw(hand2, GLM_MATERIAL | GLM_TEXTURE);
+                glmDraw(hand2, GLM_MATERIAL);
             glPopMatrix();
 
             glPushMatrix();
@@ -148,7 +162,7 @@ void display() {
                 glTranslatef(0.500 , -2.800 , 0 );
                 //glTranslatef(teapotX, teapotY, 0);
                 glColor3f(0,0,1);
-                glmDraw(leg1, GLM_MATERIAL | GLM_TEXTURE);
+                glmDraw(leg1, GLM_MATERIAL);
             glPopMatrix();
 
             glPushMatrix();
@@ -158,15 +172,11 @@ void display() {
                 glTranslatef(-0.500 , -2.800 , 0 );
                 //glTranslatef(teapotX, teapotY, 0);
                 glColor3f(0,0,1);
-                glmDraw(leg2, GLM_MATERIAL | GLM_TEXTURE);
+                glmDraw(leg2, GLM_MATERIAL);
             glPopMatrix();
 
         glPopMatrix();
     glPopMatrix();
-
-    glColor3f(0,1,0);
-    glutSolidTeapot( 0.01 );
-
     glutSwapBuffers();
     //Tangle++;///把角度++
 }
@@ -201,10 +211,11 @@ void display() {
     glMaterialfv(GL_FRONT, GL_SPECULAR,  mat_specular);
     glMaterialfv(GL_FRONT, GL_SHININESS, high_shininess);
 }*/
+
 CMP3_MCI myMP3;  ///要宣告一個變數
 int main(int argc, char** argv)
 {
-    myMP3.Load("Rock.mp3"); ///相對路徑
+    myMP3.Load("background.mp3"); ///相對路徑
     myMP3.Play();///播放
 
     glutInit(&argc, argv);
@@ -216,6 +227,8 @@ int main(int argc, char** argv)
     glutMotionFunc(motion);
     glutMouseFunc(mouse);
     glutKeyboardFunc(keyboard);
+
+    imgxbw = myTexture("background.jpg");
 
     head = glmReadOBJ("lego/head.obj");
     body = glmReadOBJ("lego/body.obj");
