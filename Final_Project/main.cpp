@@ -3,6 +3,7 @@
 #include <opencv/cv.h>
 #include <GL/glut.h>
 #include "glm.h"
+#include "CMP3_MCI.h"  ///要使用另一個外掛
 GLMmodel * head = NULL;
 GLMmodel * body = NULL; ///GLMmodel * gundam = NULL;
 GLMmodel * hand1 = NULL;
@@ -56,6 +57,7 @@ void keyboard(unsigned char key, int x, int y) {
     if(key=='2') ID=2;
     if(key=='3') ID=3;
     if(key=='4') ID=4;
+    if(key=='5') ID=5;
     if(key=='s'){ ///save 三選一: save, read, play (重開)
         if(fout==NULL) fout = fopen("motion.txt", "w");
         for(int i=0; i<20; i++){
@@ -96,7 +98,8 @@ void display() {
     //glClearColor(1,1,1,1);///用來清背景的色彩R,G,B,A
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
     glPushMatrix();
-
+        glRotatef(angle[0], 0, 1, 0);
+        glRotatef(angle2[0], 1, 0, 0);
         glScalef(1, 1, 1);
         glTranslatef(0, -0.3, 0);
         glRotatef(180, 0, 1, 0);
@@ -110,8 +113,8 @@ void display() {
 
             glPushMatrix();
                 glTranslatef(-0.000 , 6.300 , 0 );
-                glRotatef(angle[0], 0, 1, 0);
-                glRotatef(angle2[0], 1, 0, 0);
+                glRotatef(angle[1], 0, 1, 0);
+                glRotatef(angle2[1], 1, 0, 0);
                 glTranslatef(0.000 , -6.300 , 0 );
                 //glTranslatef(teapotX, teapotY, 0);
                 glColor3f(1,1,0);
@@ -120,8 +123,8 @@ void display() {
 
             glPushMatrix();
                 glTranslatef(-1.500 , 5.800 , 0 );
-                glRotatef(angle[1], 0, 1, 0);
-                glRotatef(angle2[1], 1, 0, 0);
+                glRotatef(angle[2], 0, 1, 0);
+                glRotatef(angle2[2], 1, 0, 0);
                 glTranslatef(1.500 , -5.800 , 0 );
                 //glTranslatef(teapotX, teapotY, 0);
                 glColor3f(1,0,0);
@@ -130,8 +133,8 @@ void display() {
 
             glPushMatrix();
                 glTranslatef(1.500 , 5.800 , 0 );
-                glRotatef(angle[2], 0, 1, 0);
-                glRotatef(angle2[2], 1, 0, 0);
+                glRotatef(angle[3], 0, 1, 0);
+                glRotatef(angle2[3], 1, 0, 0);
                 glTranslatef(-1.500 , -5.800 , 0 );
                 //glTranslatef(teapotX, teapotY, 0);
                 glColor3f(1,0,0);
@@ -140,8 +143,8 @@ void display() {
 
             glPushMatrix();
                 glTranslatef(-0.500 , 2.800 , 0 );
-                glRotatef(angle[3], 0, 1, 0);
-                glRotatef(angle2[3], 1, 0, 0);
+                glRotatef(angle[4], 0, 1, 0);
+                glRotatef(angle2[4], 1, 0, 0);
                 glTranslatef(0.500 , -2.800 , 0 );
                 //glTranslatef(teapotX, teapotY, 0);
                 glColor3f(0,0,1);
@@ -150,8 +153,8 @@ void display() {
 
             glPushMatrix();
                 glTranslatef(0.500 , 2.800 , 0 );
-                glRotatef(angle[4], 0, 1, 0);
-                glRotatef(angle2[4], 1, 0, 0);
+                glRotatef(angle[5], 0, 1, 0);
+                glRotatef(angle2[5], 1, 0, 0);
                 glTranslatef(-0.500 , -2.800 , 0 );
                 //glTranslatef(teapotX, teapotY, 0);
                 glColor3f(0,0,1);
@@ -198,8 +201,12 @@ void display() {
     glMaterialfv(GL_FRONT, GL_SPECULAR,  mat_specular);
     glMaterialfv(GL_FRONT, GL_SHININESS, high_shininess);
 }*/
+CMP3_MCI myMP3;  ///要宣告一個變數
 int main(int argc, char** argv)
 {
+    myMP3.Load("Rock.mp3"); ///相對路徑
+    myMP3.Play();///播放
+
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE|GLUT_DEPTH);
     glutCreateWindow("week16");

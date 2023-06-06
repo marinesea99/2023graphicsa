@@ -29,7 +29,7 @@
 1684890032 c:\users\administrator\desktop\2023graphicsa\final_project\glm.h
 	<GL/glut.h>
 
-1685625037 source:c:\users\user\desktop\2023graphicsa\final_project\glm.cpp
+1686042994 source:c:\users\user\desktop\2023graphicsa\final_project\glm.cpp
 	<math.h>
 	<stdio.h>
 	<stdlib.h>
@@ -37,13 +37,13 @@
 	<assert.h>
 	"glm.h"
 
-1685625037 c:\users\user\desktop\2023graphicsa\final_project\glm.h
+1686042994 c:\users\user\desktop\2023graphicsa\final_project\glm.h
 	<GL/glut.h>
 
-1685625037 c:\users\user\desktop\2023graphicsa\final_project\freeglut\include\gl\glut.h
+1686042994 c:\users\user\desktop\2023graphicsa\final_project\freeglut\include\gl\glut.h
 	"freeglut_std.h"
 
-1685625037 c:\users\user\desktop\2023graphicsa\final_project\freeglut\include\gl\freeglut_std.h
+1686042994 c:\users\user\desktop\2023graphicsa\final_project\freeglut\include\gl\freeglut_std.h
 	<windows.h>
 	<EGL/egl.h>
 	<GLES/gl.h>
@@ -54,10 +54,16 @@
 	<GL/glu.h>
 	<stdlib.h>
 
-1685630198 source:c:\users\user\desktop\2023graphicsa\final_project\main.cpp
+1686043817 source:c:\users\user\desktop\2023graphicsa\final_project\main.cpp
 	<stdio.h>
 	<opencv/highgui.h>
 	<opencv/cv.h>
 	<GL/glut.h>
 	"glm.h"
+	"CMP3_MCI.h"
+
+1686042994 c:\users\user\desktop\2023graphicsa\final_project\cmp3_mci.h
+	<string>
+	<windows.h>
+	<mmsystem.h>
 
